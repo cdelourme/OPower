@@ -41,6 +41,7 @@ public class HeaterDAOImpl extends GenericDAO{
 		try{
 			tx = em.getTransaction();
 			tx.begin();
+			(em.find(Home.class,persistentInstance.getHome().getId())).removeHeater(persistentInstance);
 			em.remove(em.merge(persistentInstance));
 			tx.commit();
 		}catch(Exception re)

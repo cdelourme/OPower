@@ -91,7 +91,9 @@ public class HomeDAOImpl extends GenericDAO{
 		try{
 			tx = em.getTransaction();
 			tx.begin();
-			em.remove(persistentInstance);//em.merge(persistentInstance));
+			(em.find(Person.class,persistentInstance.getPerson().getId())).removeHome(persistentInstance);
+			
+			em.remove(em.merge(persistentInstance));
 			tx.commit();
 		}catch(Exception re)
 		{

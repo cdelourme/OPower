@@ -112,6 +112,12 @@ public class Person implements Serializable{
 		h.setPerson(this);
 	}
 	
+	public void removeHome(Home h){
+		if (homes != null){
+		homes.remove(h);
+		}
+	}
+	
 	public void update( Person p ){
 		if (p != null){
 			this.setNom(p.getNom());

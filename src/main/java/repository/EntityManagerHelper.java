@@ -22,7 +22,7 @@ public class EntityManagerHelper {
 	
 	public static void closeEntityManager() {
 		EntityManager em = threadLocal.get();
-		if (em != null) {
+		if (em != null & em.isOpen()) {
 			em.close();
 			threadLocal.set(null);
 		}

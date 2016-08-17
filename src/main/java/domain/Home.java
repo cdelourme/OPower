@@ -87,6 +87,13 @@ public class Home implements Serializable{
 		heaters.add(h);
 		h.setHome(this);
 	}
+	
+	public void removeHeater(Heater h){
+		if (heaters != null){
+			heaters.remove(h);
+		}
+	}
+	
 	@Basic
 	@Column(name = "TAILLE")
 	public int getTaille() {
@@ -119,6 +126,13 @@ public class Home implements Serializable{
 		devices.add(e);
 		e.setHome(this);
 	}
+	
+	public void removeDevice(ElectronicDevice e){
+		if (devices != null){
+			devices.remove(e);
+		}
+	}
+	
 	@ManyToOne
     @XmlTransient
 	public Person getPerson() {
