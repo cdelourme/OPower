@@ -68,6 +68,15 @@ public class HomeResource {
 		homeDao.createHomeHeater(id, nom, consoMoyenne);
     }
 	
+	@POST @Path("{id}/Device/")
+    public void createHomeDevice(@PathParam("id") String id,
+    		@FormParam("nom") String nom,
+            @FormParam("consoMoyenne") int consoMoyenne) { 
+		System.out.println("POST de Home/Device"); 
+		System.out.println(nom +","+ consoMoyenne); 
+		homeDao.createHomeDevice(id, nom, consoMoyenne);
+    }
+	
 	@PUT
     @Consumes({ MediaType.APPLICATION_JSON }) 
     public void createUpdateHome( Home p) { 

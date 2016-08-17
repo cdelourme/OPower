@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import domain.ElectronicDevice;
 import domain.Heater;
 import domain.Home;
 import domain.Person;
@@ -70,7 +71,33 @@ public class HomeDAOImpl extends GenericDAO{
 				Heater h = new Heater( nom, consoMoyenne );
 				home.addHeater(h);
 			
-				System.out.println("Create a Home" + home.toString());
+				System.out.println("Create a Home/Heater" + home.toString());
+				em.merge(home);
+				tx.commit();
+			}catch(Exception re)
+			{
+				if(tx!=null){
+					System.out.println("Something went wrong; Discard all partial changes");
+					tx.rollback();
+				}
+			}finally{
+				closeEntityManager();
+			}
+		return home;
+	}
+	
+	public Home createHomeDevice(String id, String nom, int consoMoyenne){
+		EntityManager em = createEntityManager();  
+		EntityTransaction tx = null;
+		Home home = findById(id);
+			try{
+				tx = em.getTransaction();
+				tx.begin();
+				
+				ElectronicDevice h = new ElectronicDevice( nom, consoMoyenne );
+				home.addDevice(h);
+			
+				System.out.println("Create a Home/Device" + home.toString());
 				em.merge(home);
 				tx.commit();
 			}catch(Exception re)
