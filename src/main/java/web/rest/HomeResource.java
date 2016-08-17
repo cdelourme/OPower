@@ -14,9 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import domain.Home;
-import domain.Person;
 import repository.HomeDAOImpl;
-import repository.PersonDAOImpl;
 
 
 @Path("/home")

@@ -11,6 +11,10 @@ import domain.Home;
 import domain.Person;
 
 public class HomeDAOImpl extends GenericDAO{
+
+/*
+ * 		createHome(List<Home> homes)
+ */
 	
 	public void createHome(List<Home> homes){
 		EntityManager em = createEntityManager();  
@@ -18,40 +22,36 @@ public class HomeDAOImpl extends GenericDAO{
 		try{
 			tx = em.getTransaction();
 			tx.begin();
-			
 			for(Home p : homes){
-				System.out.println("Ajout de Home " + p.toString());
 				em.persist(p);
 			}
-			
 			tx.commit();
 		}catch(Exception re)
 		{
 			if(tx!=null)
-			System.out.println("Something went wrong; Discard all partial changes");
 			tx.rollback();
 		}finally{
 			closeEntityManager();
 		}
 	}
 
+/*
+ * 		createHome(String nom, int taille, int nombre)
+ */
+	
 	public Home createHome(String nom, int taille, int nombre){
 		EntityManager em = createEntityManager();  
 		EntityTransaction tx = null;
 		Home home = null;
 			try{
 				tx = em.getTransaction();
-				tx.begin();
-				
+				tx.begin();	
 				home=new Home(nom,taille,nombre);
-			
-				System.out.println("Create a Home" + home.toString());
 				em.persist(home);
 				tx.commit();
 			}catch(Exception re)
 			{
 				if(tx!=null){
-					System.out.println("Something went wrong; Discard all partial changes");
 					tx.rollback();
 				}
 			}finally{
@@ -59,6 +59,10 @@ public class HomeDAOImpl extends GenericDAO{
 			}
 		return home;
 	}
+
+/*
+ * 		createHomeHeater(String id, String nom, int consoMoyenne)
+ */
 	
 	public Home createHomeHeater(String id, String nom, int consoMoyenne){
 		EntityManager em = createEntityManager();  
@@ -67,17 +71,13 @@ public class HomeDAOImpl extends GenericDAO{
 			try{
 				tx = em.getTransaction();
 				tx.begin();
-				
 				Heater h = new Heater( nom, consoMoyenne );
 				home.addHeater(h);
-			
-				System.out.println("Create a Home/Heater" + home.toString());
 				em.merge(home);
 				tx.commit();
 			}catch(Exception re)
 			{
 				if(tx!=null){
-					System.out.println("Something went wrong; Discard all partial changes");
 					tx.rollback();
 				}
 			}finally{
@@ -85,6 +85,10 @@ public class HomeDAOImpl extends GenericDAO{
 			}
 		return home;
 	}
+
+/*
+ * 		createHomeDevice(String id, String nom, int consoMoyenne)
+ */
 	
 	public Home createHomeDevice(String id, String nom, int consoMoyenne){
 		EntityManager em = createEntityManager();  
@@ -96,14 +100,11 @@ public class HomeDAOImpl extends GenericDAO{
 				
 				ElectronicDevice h = new ElectronicDevice( nom, consoMoyenne );
 				home.addDevice(h);
-			
-				System.out.println("Create a Home/Device" + home.toString());
 				em.merge(home);
 				tx.commit();
 			}catch(Exception re)
 			{
 				if(tx!=null){
-					System.out.println("Something went wrong; Discard all partial changes");
 					tx.rollback();
 				}
 			}finally{
@@ -111,6 +112,10 @@ public class HomeDAOImpl extends GenericDAO{
 			}
 		return home;
 	}
+
+/*
+ * 		delete(Home persistentInstance)
+ */
 	
 	public void delete(Home persistentInstance){
 		EntityManager em = createEntityManager();  
@@ -126,7 +131,6 @@ public class HomeDAOImpl extends GenericDAO{
 		{
 			re.printStackTrace();
 			if(tx!=null){
-				System.out.println("Something went wrong; Discard all partial changes");
 				tx.rollback();
 			}
 		}finally{
@@ -134,28 +138,36 @@ public class HomeDAOImpl extends GenericDAO{
 		}
 	}
 	
+/*
+ * 		delete(String id)
+ */
+	
 	public void delete(String id){
 		delete(findById(id));
 	}
+
+/*
+ * 		findAll()
+ */
 	
 	@SuppressWarnings("unchecked")
 	public List<Home> findAll(){
 		EntityManager em = createEntityManager();  
 		List<Home> results = null;
 		try{
-		
 			results = em.createQuery("select p from Home p").getResultList();
-			
 		}catch(Exception re)
 		{
-			System.out.println("Something went wrong; Discard all partial changes");
 		}finally{
 			closeEntityManager();
 		}
-		System.out.println("sortie de getALL()");
 		return results;
 	}
 
+/*
+ * 		findById(String id)
+ */
+	
 	public Home findById(String id){
 		EntityManager em = createEntityManager();  
 		Home instance = null;
@@ -166,10 +178,12 @@ public class HomeDAOImpl extends GenericDAO{
 		}finally{
 			closeEntityManager();
 		}
-		
 		return instance;
-		
 	}
+	
+/*
+ * 		findByPersonId(String id)
+ */
 	
 	public List<Home> findByPersonId(String id){
 		EntityManager em = createEntityManager();  
@@ -187,6 +201,10 @@ public class HomeDAOImpl extends GenericDAO{
 		return homes;
 	}
 
+/*
+ * 		update (Home p)
+ */
+	
 	public Home update (Home p) {
 		EntityManager em = createEntityManager();  
 		EntityTransaction tx = null;
@@ -198,7 +216,6 @@ public class HomeDAOImpl extends GenericDAO{
 		}catch(Exception re)
 		{
 			if(tx!=null){
-				System.out.println("Something went wrong; Discard all partial changes");
 				tx.rollback();
 			}
 		}finally{

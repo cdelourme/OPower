@@ -12,19 +12,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonManagedReference;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 
 
@@ -33,9 +26,6 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 @XmlRootElement
 public class Home implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6392613119419452404L;
 	private String id;
 	private String name;
@@ -54,19 +44,23 @@ public class Home implements Serializable{
 		this.taille = taille;
 		this.nombrePiece = nombrePiece;
 	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	@Basic
 	@Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -77,9 +71,11 @@ public class Home implements Serializable{
 	public List<Heater> getHeaters() {
 		return heaters;
 	}
+	
 	public void setHeaters(List<Heater> heaters) {
 		this.heaters = heaters;
 	}
+	
 	public void addHeater(Heater h){
 		if (heaters == null){
 			heaters = new ArrayList<Heater>();
@@ -99,14 +95,17 @@ public class Home implements Serializable{
 	public int getTaille() {
 		return taille;
 	}
+	
 	public void setTaille(int taille) {
 		this.taille = taille;
 	}
+	
 	@Basic
 	@Column(name = "NOMBREPIECE")
 	public int getNombrePiece() {
 		return nombrePiece;
 	}
+	
 	public void setNombrePiece(int nombrePiece) {
 		this.nombrePiece = nombrePiece;
 	}
@@ -116,9 +115,11 @@ public class Home implements Serializable{
 	public List<ElectronicDevice> getDevices() {
 		return devices;
 	}
+	
 	public void setDevices(List<ElectronicDevice> devices) {
 		this.devices = devices;
 	}
+	
 	public void addDevice(ElectronicDevice e){
 		if (devices == null){
 			devices = new ArrayList<ElectronicDevice>();
@@ -154,6 +155,7 @@ public class Home implements Serializable{
 		result = prime * result + taille;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -184,6 +186,7 @@ public class Home implements Serializable{
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "Home [id=" + id + ", name=" + name + ", taille=" + taille + ", nombrePiece=" + nombrePiece

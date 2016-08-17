@@ -6,12 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import domain.ElectronicDevice;
-import domain.Heater;
 import domain.Home;
-import domain.Person;
 
 public class DeviceDAOImpl extends GenericDAO{
 	
+/*
+ * 		createDevice(String name, int conso)
+ */
 	public ElectronicDevice createDevice(String name, int conso){
 		EntityManager em = createEntityManager();  
 		EntityTransaction tx = null;
@@ -20,7 +21,6 @@ public class DeviceDAOImpl extends GenericDAO{
 			tx = em.getTransaction();
 			tx.begin();
 			device=new ElectronicDevice(name,conso);
-			System.out.println("Create an ElectronicDevice" + device.toString());
 			em.persist(device);
 			tx.commit();
 		}catch(Exception re)
@@ -35,7 +35,9 @@ public class DeviceDAOImpl extends GenericDAO{
 		return device;
 	}
 	
-	
+/*
+ * 		delete(ElectronicDevice persistentInstance)
+ */
 	public void delete(ElectronicDevice persistentInstance){
 		EntityManager em = createEntityManager();  
 		EntityTransaction tx = null;
@@ -56,29 +58,35 @@ public class DeviceDAOImpl extends GenericDAO{
 			closeEntityManager();
 		}
 	}
-	
+
+/*
+ * 		delete(String id)
+ */
 	public void delete(String id){
 		delete(findById(id));
 	}
-	
+
+/*
+ * 		findAll()
+ */
 	@SuppressWarnings("unchecked")
 	public List<ElectronicDevice> findAll(){
 		EntityManager em = createEntityManager();  
 		List<ElectronicDevice> results = null;
 		try{
-		
 			results = em.createQuery("select d from ElectronicDevice d").getResultList();
-			
 		}catch(Exception re)
 		{
 			System.out.println("Something went wrong; Discard all partial changes");
 		}finally{
 			closeEntityManager();
 		}
-		System.out.println("sortie de getALL()");
 		return results;
 	}
 
+/*
+ * 		findById(String id)
+ */
 	public ElectronicDevice findById(String id){
 		EntityManager em = createEntityManager();  
 		ElectronicDevice instance = null;
@@ -89,10 +97,12 @@ public class DeviceDAOImpl extends GenericDAO{
 		}finally{
 			closeEntityManager();
 		}
-		
 		return instance;
 	}
-		
+
+/*
+ * 		update(ElectronicDevice p)
+ */
 	public ElectronicDevice update (ElectronicDevice p) {
 		EntityManager em = createEntityManager();  
 		EntityTransaction tx = null;

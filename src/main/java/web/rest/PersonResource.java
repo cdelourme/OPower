@@ -50,28 +50,22 @@ public class PersonResource {
 	@POST 
     public void createPerson(@FormParam("nom") String nom,
             @FormParam("prenom") String prenom,
-            @FormParam("mail") String mail) { 
-		System.out.println("POST de Person"); 
-		System.out.println(nom +","+ prenom +","+ mail); 
-		//on s'arrure de l'unicité des mails
-		if (personDao.findByMail(mail).size() == 0)
-			personDao. createPerson(nom,prenom,mail);
+            @FormParam("mail") String mail) {  
+			//on s'arrure de l'unicité des mails
+			if (personDao.findByMail(mail).size() == 0)
+				personDao. createPerson(nom,prenom,mail);
     } 
 	
 	@POST @Path("{id}/") 
     public void updatePersonHome(@PathParam("id") String id,@FormParam("nom") String nom,
             @FormParam("taille") int taille,
             @FormParam("nombrePiece") int nombrePiece) { 
-		System.out.println("POST de Person/home" + id); 
-		System.out.println(nom +","+ taille +","+ nombrePiece); 
-		//on s'arrure de l'unicité des mails
-		personDao.updatePersonHome(id,nom,taille,nombrePiece);
+			personDao.updatePersonHome(id,nom,taille,nombrePiece);
     } 
 	
 	@PUT
     @Consumes({ MediaType.APPLICATION_JSON }) 
     public void createUpdatePerson( Person p) { 
-		System.out.println("PUT de Person ...");
 		Person p2 = personDao.findById(p.getId());
 		if (p2 != null){
 			System.out.println("		-> Update");

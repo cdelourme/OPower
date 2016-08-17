@@ -7,9 +7,12 @@ import javax.persistence.EntityTransaction;
 
 import domain.Heater;
 import domain.Home;
-import domain.Person;
 
 public class HeaterDAOImpl extends GenericDAO{
+	
+/*
+ * 		createHeater(String name, int conso)
+ */
 	
 	public Heater createHeater(String name, int conso){
 		EntityManager em = createEntityManager();  
@@ -19,7 +22,6 @@ public class HeaterDAOImpl extends GenericDAO{
 			tx = em.getTransaction();
 			tx.begin();
 			heater=new Heater(name,conso);
-			System.out.println("Create a Heater" + heater.toString());
 			em.persist(heater);
 			tx.commit();
 		}catch(Exception re)
@@ -34,6 +36,9 @@ public class HeaterDAOImpl extends GenericDAO{
 		return heater;
 	}
 	
+/*
+ * 		delete(Heater persistentInstance)
+ */
 	
 	public void delete(Heater persistentInstance){
 		EntityManager em = createEntityManager();  
@@ -55,19 +60,25 @@ public class HeaterDAOImpl extends GenericDAO{
 			closeEntityManager();
 		}
 	}
+
+/*
+ * 		delete(String id)
+ */
 	
 	public void delete(String id){
 		delete(findById(id));
 	}
+
+/*
+ * 		findAll()
+ */
 	
 	@SuppressWarnings("unchecked")
 	public List<Heater> findAll(){
 		EntityManager em = createEntityManager();  
 		List<Heater> results = null;
 		try{
-		
 			results = em.createQuery("select h from Heater h").getResultList();
-			
 		}catch(Exception re)
 		{
 			System.out.println("Something went wrong; Discard all partial changes");
@@ -78,6 +89,10 @@ public class HeaterDAOImpl extends GenericDAO{
 		return results;
 	}
 
+/*
+ * 		findById(String id)
+ */
+	
 	public Heater findById(String id){
 		EntityManager em = createEntityManager();  
 		Heater instance = null;
@@ -88,10 +103,13 @@ public class HeaterDAOImpl extends GenericDAO{
 		}finally{
 			closeEntityManager();
 		}
-		
 		return instance;
 	}
-		
+
+/*
+ * 		update (Heater p)
+ */
+	
 	public Heater update (Heater p) {
 		EntityManager em = createEntityManager();  
 		EntityTransaction tx = null;

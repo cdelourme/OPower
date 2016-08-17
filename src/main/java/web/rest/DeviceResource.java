@@ -14,11 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import domain.ElectronicDevice;
-import domain.Heater;
-import domain.Person;
 import repository.DeviceDAOImpl;
-import repository.HeaterDAOImpl;
-import repository.PersonDAOImpl;
 
 @Path("/device")
 public class DeviceResource {

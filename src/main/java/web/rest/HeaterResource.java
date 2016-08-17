@@ -14,9 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import domain.Heater;
-import domain.Person;
 import repository.HeaterDAOImpl;
-import repository.PersonDAOImpl;
 
 @Path("/heater")
 public class HeaterResource {

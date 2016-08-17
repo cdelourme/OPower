@@ -8,7 +8,6 @@ opowerApp.controller('mainCtrl', function($scope,$http,$routeParams,personFactor
 	$scope.searchPerson = function(id){
 		personFactory.searchPerson(id);
 	}
-
 })
 
 

@@ -3,29 +3,21 @@ package domain;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
 
 @Entity
 @Table(name = "ELECTRONICDEVICE")
 @XmlRootElement
 public class ElectronicDevice implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2318686645924615059L;
 	private String id;
 	private String name;
@@ -46,31 +38,37 @@ public class ElectronicDevice implements Serializable{
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	@Basic
 	@Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	@Basic
 	@Column(name = "CONSO")
 	public int getConsoMoyenne() {
 		return consoMoyenne;
 	}
+	
 	public void setConsoMoyenne(int consoMoyenne) {
 		this.consoMoyenne = consoMoyenne;
 	}
 
-	@ManyToOne//(optional = true,cascade=CascadeType.PERSIST)
+	@ManyToOne
 	@XmlTransient
 	public Home getHome(){
 		return home;
 	}
+	
 	public void setHome(Home h){
 		home = h;
 	}

@@ -2,28 +2,21 @@ package domain;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
 
 @Entity
 @Table(name = "HEATER")
 @XmlRootElement
 public class Heater implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8415736400133092005L;
 	private String id;
 	private String name;
@@ -68,7 +61,7 @@ public class Heater implements Serializable {
 		this.consoMoyenne = consoMoyenne;
 	}
 
-	@ManyToOne//(optional = true,cascade=CascadeType.PERSIST)
+	@ManyToOne
 	@XmlTransient
 	public Home getHome(){
 		return home;

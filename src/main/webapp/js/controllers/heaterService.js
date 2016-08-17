@@ -1,5 +1,5 @@
 /**
-Service pour manipuler les personnes.
+Service pour manipuler les heaters.
 */
 
 opowerApp.factory('heaterFactory', function( $http, $rootScope ){
@@ -15,7 +15,7 @@ opowerApp.factory('heaterFactory', function( $http, $rootScope ){
 				})
 		  };
 
-	// retourne une maison en fonction d'un id
+	// retourne un heater en fonction d'un id
 	factory.searchHeater = function(id){
 		console.log("Search ...");
 		return $http({
