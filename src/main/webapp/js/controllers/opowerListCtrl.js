@@ -24,8 +24,20 @@ opowerApp.controller('editPersonCtrl', function($scope, $routeParams, homeFactor
       $scope.createHeater = function(){
         heaterFactory.create($scope.editHome.id,$scope.nomHeater,$scope.consoHeater);
       }
+      $scope.updateHeater = function(){
+        $scope.editheater.name = $scope.nomHeater ;
+        $scope.editheater.consoMoyenne = $scope.consoHeater ;
+        heaterFactory.update($scope.editheater);
+      }
       $scope.deleteHeater = function(id){
         heaterFactory.delete(id);
+      }
+      $scope.modifyHeater = function(heater){
+        $scope.nomHeater = heater.name;
+        $scope.consoHeater = heater.consoMoyenne;
+        $scope.editheater = heater;
+        $scope.showEditHeater = !$scope.showEditHeater;
+
       }
       $scope.deleteHome = function(id){
         homeFactory.delete(id);
@@ -41,7 +53,6 @@ opowerApp.controller('editPersonCtrl', function($scope, $routeParams, homeFactor
       $scope.modifyShowEditHeater = function(home){
         $scope.showEditHeater = !$scope.showEditHeater;
         $scope.editHome = home;
-        console.log($scope.editHome);
       }
       $scope.modifyShowEditPerson = function(){
         $scope.showEditPerson = !$scope.showEditPerson;
