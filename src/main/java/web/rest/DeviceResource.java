@@ -56,7 +56,8 @@ public class DeviceResource {
 		ElectronicDevice p2 = deviceDao.findById(p.getId());
 		if (p2 != null){
 			System.out.println("		-> Update");
-			p2=p;
+			p2.setName(p.getName());
+			p2.setConsoMoyenne(p.getConsoMoyenne());
 			deviceDao.update(p2);
 		}
 		else
