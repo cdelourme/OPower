@@ -49,6 +49,7 @@
       <a href="#/listPerson" ng-click="createHome()" class="btn btn-danger btn-xs pull-right">Create</a>
     </div>
 
+
 <!--
 ***   affichage de la zone pour creation/modication des chauffages  ***
 -->
@@ -64,11 +65,69 @@
       </div>
       <a href="#/listPerson" ng-click="createHeater()" class="btn btn-danger btn-xs pull-right">Create</a>
       <a href="#/listPerson" ng-click="updateHeater()" class="btn btn-danger btn-xs pull-right">Update</a>
+      <a ng-click="modifyShowEditHeater();" class="btn btn-danger btn-xs pull-right">Cancel</a>
     </div>
+
+    <!--
+    ***   affichage de la zone pour creation/modication des Devices  ***
+    -->
+        <div ng-show=showEditDevice>
+          <p>Add/modify a Device : {{editHome}}</p>
+          <div>
+            <label>Name:</label>
+            <input type="text" class="form-control" ng-model=nomDevice />
+          </div>
+          <div>
+            <label>consumption:</label>
+            <input type="text" class="form-control" ng-model=consoDevice />
+          </div>
+          <a href="#/listPerson" ng-click="createDevice()" class="btn btn-danger btn-xs pull-right">Create</a>
+          <a href="#/listPerson" ng-click="updateDevice()" class="btn btn-danger btn-xs pull-right">Update</a>
+          <a ng-click="modifyShowEditDevice();" class="btn btn-danger btn-xs pull-right">Cancel</a>
+        </div>
+
+    <!--
+    ***   affichage du tableau contenant les maisons et les chauffages  ***
+    -->
+      <br>
+      <br>
+        <div>
+          <table class="table table-striped table-bordered">
+            <tbody ng-repeat="home in edituser.homes">
+                <tr><td><h3>{{home.name}}</h3></td>
+                <td><h3>{{home.taille}}</h3></td>
+                <td><h3>{{home.nombrePiece}}</h3></td>
+                <td><a ng-click="modifyShowEditHeater(home,null)" class="btn btn-default btn-xs pull-right">Add heater</a></td>
+                <td><a ng-click="modifyShowEditDevice(home,null)" class="btn btn-success btn-xs pull-right">Add device</a></td>
+                <td><a href="#/listPerson" ng-click="deleteHome(home.id)" class="btn btn-info btn-xs pull-right">Delete house</a></td>
+                </tr>
+                <tr ng-repeat="heater in home.heaters">
+                    <td> --heater-- </td>
+                    <td>{{heater.name}}</td>
+                    <td>{{heater.consoMoyenne}}</td>
+                    <td><a ng-click="modifyShowEditHeater(home,heater)" class="btn btn-default btn-xs pull-right">Modify heater</a></td>
+                    <td><a href="#/listPerson" ng-click="deleteHeater(heater.id)" class="btn btn-default btn-xs pull-right">Delete heater</a></td>
+                </tr>
+                <tr ng-repeat="device in home.devices">
+                    <td> --device-- </td>
+                    <td>{{device.name}}</td>
+                    <td>{{device.consoMoyenne}}</td>
+                    <td><a ng-click="modifyShowEditDevice(home,device)" class="btn btn-success btn-xs pull-right">Modify device</a></td>
+                    <td><a href="#/listPerson" ng-click="deleteDevice(device.id)" class="btn btn-success btn-xs pull-right">Delete device</a></td>
+                </tr>
+            </body>
+
+          </table>
+        </div>
+
+
+
+
+
 
 <!--
 ***   affichage du tableau contenant les maisons et les chauffages  ***
--->
+
   <br>
   <br>
     <div>
@@ -91,5 +150,5 @@
         </tr>
       </table>
     </div>
-
+-->
 </div>
